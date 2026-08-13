@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SteadyGantt — Gantt Chart for Jira with Safe Rescheduling</title>
+<meta name="description" content="The Gantt chart that never touches your Jira data without asking. Drag freely, review the exact diff, sync only what you confirm — and undo in one click.">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  :root { --blue:#0052CC; --ink:#172B4D; --sub:#44546F; --bg:#FFFFFF; --soft:#F7F8F9; --line:#DCDFE4; --green:#22A06B; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color:var(--ink); background:var(--bg); }
+  .wrap { max-width:880px; margin:0 auto; padding:0 24px; }
+  header { padding:64px 0 48px; text-align:center; }
+  header img { width:88px; height:88px; border-radius:20px; }
+  h1 { font-size:2.1rem; margin:20px 0 10px; letter-spacing:-.02em; }
+  .tagline { font-size:1.15rem; color:var(--sub); max-width:640px; margin:0 auto; }
+  .badges { margin-top:22px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .badge { font-size:.82rem; font-weight:600; padding:5px 12px; border-radius:999px;
+           background:var(--soft); border:1px solid var(--line); color:var(--sub); }
+  .badge.green { color:var(--green); border-color:#BBE7D0; background:#F0FBF5; }
+  section { padding:36px 0; border-top:1px solid var(--line); }
+  h2 { font-size:1.35rem; margin-bottom:18px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+  .card { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .card h3 { font-size:1.02rem; margin-bottom:8px; }
+  .card p { font-size:.93rem; color:var(--sub); }
+  ol.flow { list-style:none; counter-reset:step; display:flex; flex-wrap:wrap; gap:12px; padding:0; }
+  ol.flow li { counter-increment:step; flex:1 1 150px; background:var(--soft); border:1px solid var(--line);
+               border-radius:10px; padding:14px; font-size:.9rem; color:var(--sub); }
+  ol.flow li::before { content:counter(step); display:inline-block; width:22px; height:22px; border-radius:50%;
+               background:var(--blue); color:#fff; font-size:.78rem; font-weight:700; text-align:center;
+               line-height:22px; margin-bottom:8px; }
+  ol.flow li b { display:block; color:var(--ink); }
+  footer { border-top:1px solid var(--line); padding:32px 0 48px; font-size:.88rem; color:var(--sub);
+           text-align:center; }
+  footer a { color:var(--blue); text-decoration:none; }
+  footer a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img src="icon.svg" alt="SteadyGantt icon">
+  <h1>SteadyGantt</h1>
+  <p class="tagline">The Gantt chart for Jira that never touches your data without asking.
+  Drag freely, review the exact diff, sync only what you confirm — and undo in one click.</p>
+  <div class="badges">
+    <span class="badge green">Runs on Atlassian — your data never leaves</span>
+    <span class="badge">No trackers</span>
+    <span class="badge">Built on Atlassian Forge</span>
+  </div>
+</header>
+
+<section>
+  <h2>Why another Gantt app?</h2>
+  <p style="color:var(--sub)">Because too many timeline tools rewrite dates on install, sync changes you never
+  meant to make, or lose your structure in an update. SteadyGantt is built around one promise:
+  <b style="color:var(--ink)">Jira stays untouched until you say so.</b></p>
+</section>
+
+<section>
+  <h2>The safety model</h2>
+  <ol class="flow">
+    <li><b>Read-only by default</b>Open it, explore, zoom — nothing is written.</li>
+    <li><b>Drafts first</b>Every drag is a draft, shown next to a ghost of the original.</li>
+    <li><b>Exact diff</b>Review old → new for every change, apply only what you check.</li>
+    <li><b>One-click undo</b>Any sync can be reversed to the previous values instantly.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>What you get</h2>
+  <div class="grid">
+    <div class="card"><h3>Full hierarchy &amp; dependencies</h3>
+      <p>Epic → Task → Subtask nesting, dependency arrows from issue links, epic envelopes derived from children.</p></div>
+    <div class="card"><h3>Fast at any size</h3>
+      <p>Canvas rendering with a performance budget enforced in CI. First paint in about a second, instant reopen from local cache, smooth with thousands of issues.</p></div>
+    <div class="card"><h3>Views that remember themselves</h3>
+      <p>Zoom, scroll, collapsed groups, panel width — restored exactly as you left them, on any device.</p></div>
+    <div class="card"><h3>Hour-level to month-level zoom</h3>
+      <p>Plan the week in hours or the quarter in months, with a today marker and weekend shading.</p></div>
+    <div class="card"><h3>PNG export</h3>
+      <p>One click to a clean image of your timeline for slides and status reports.</p></div>
+    <div class="card"><h3>Nothing leaves Atlassian</h3>
+      <p>No external servers, no third-party calls, no analytics. Eligible for the Runs on Atlassian program.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Questions answered within 24 hours: <a href="mailto:carsh.blue522@gmail.com">carsh.blue522@gmail.com</a></p>
+  <p style="margin-top:8px"><a href="privacy/">Privacy policy</a> · © 2026 SteadyGantt</p>
+</footer>
+
+</div>
+</body>
+</html>
