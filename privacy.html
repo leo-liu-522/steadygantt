@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — SteadyGantt</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  :root { --blue:#0052CC; --ink:#172B4D; --sub:#44546F; --line:#DCDFE4; --soft:#F7F8F9; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color:var(--ink); }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 24px 64px; }
+  h1 { font-size:1.7rem; margin-bottom:6px; }
+  .meta { color:var(--sub); font-size:.9rem; margin-bottom:28px; }
+  h2 { font-size:1.15rem; margin:30px 0 10px; }
+  p, li { color:var(--sub); font-size:.97rem; }
+  p b, li b { color:var(--ink); }
+  ul { padding-left:22px; margin:8px 0; }
+  .callout { background:var(--soft); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:18px 0; }
+  a { color:var(--blue); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Privacy Policy</h1>
+<p class="meta">SteadyGantt for Jira · Effective August 13, 2026</p>
+
+<div class="callout">
+  <p><b>Summary:</b> SteadyGantt has no servers of its own. Your Jira data never leaves Atlassian's
+  infrastructure, nothing is sent to us or to any third party, and the app contains no analytics,
+  trackers, or third-party scripts.</p>
+</div>
+
+<h2>Who we are</h2>
+<p>SteadyGantt is a Jira Cloud app built on the Atlassian Forge platform, developed and operated by
+an independent developer. Contact: <a href="mailto:carsh.blue522@gmail.com">carsh.blue522@gmail.com</a>.</p>
+
+<h2>What data the app accesses</h2>
+<p>When you open SteadyGantt inside a Jira project, it reads — through Atlassian's official APIs and
+only for the duration of your session — the following fields of that project's issues: summary, issue
+type, parent/epic relationship, start date, due date, status, assignee display name, and issue links.
+This is the minimum needed to draw the chart.</p>
+<p>The app writes to Jira in exactly one case: after you review a change summary ("diff") and
+explicitly confirm it. Only the date fields you checked are written. Every sync can be undone in
+one click.</p>
+
+<h2>What data the app stores</h2>
+<ul>
+  <li><b>View preferences</b> (zoom level, scroll position, collapsed groups, panel width) are saved in
+  Forge storage — a storage service hosted entirely by Atlassian inside your Jira site's data boundary —
+  keyed by your Atlassian account ID and the project key, so your view is restored on any device.</li>
+  <li><b>A local cache of the task list</b> is kept in your own browser's localStorage so the chart
+  reopens instantly. This cache never leaves your browser and is refreshed automatically.</li>
+</ul>
+<p>Nothing is stored on our own systems, because we do not operate any. We cannot see your Jira data,
+your view preferences, or anything else about your site.</p>
+
+<h2>Data leaving Atlassian</h2>
+<p>None. The app declares no external endpoints and the Forge platform enforces this at runtime —
+it is technically incapable of sending your data outside Atlassian. The production version of
+SteadyGantt is eligible for Atlassian's <a href="https://go.atlassian.com/runs-on-atlassian">Runs on
+Atlassian</a> program, which certifies exactly this property.</p>
+
+<h2>Analytics, cookies, and trackers</h2>
+<p>None. The app sets no cookies, loads no third-party scripts, and includes no analytics or
+telemetry of any kind.</p>
+
+<h2>Data retention and deletion</h2>
+<ul>
+  <li>Uninstalling the app removes its Forge storage in accordance with Atlassian's platform data
+  lifecycle.</li>
+  <li>The browser cache can be cleared at any time through your browser settings, and is overwritten
+  on each visit.</li>
+</ul>
+
+<h2>Changes to this policy</h2>
+<p>If the app's data practices ever change (for example, a future feature that requires new
+permissions), this page will be updated before the change ships, and the change will be visible in
+the app's requested scopes, which Atlassian requires administrators to re-approve.</p>
+
+<h2>Contact</h2>
+<p>Questions about privacy are answered within 24 hours:
+<a href="mailto:carsh.blue522@gmail.com">carsh.blue522@gmail.com</a>.</p>
+
+<p style="margin-top:36px"><a href="">← Back to SteadyGantt</a></p>
+
+</div>
+</body>
+</html>
