@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security Policy — SteadyGantt</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  :root { --blue:#0052CC; --ink:#172B4D; --sub:#44546F; --line:#DCDFE4; --soft:#F7F8F9; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color:var(--ink); }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 24px 64px; }
+  h1 { font-size:1.7rem; margin-bottom:6px; }
+  .meta { color:var(--sub); font-size:.9rem; margin-bottom:28px; }
+  h2 { font-size:1.15rem; margin:30px 0 10px; }
+  p, li { color:var(--sub); font-size:.97rem; }
+  p b, li b { color:var(--ink); }
+  ul { padding-left:22px; margin:8px 0; }
+  .callout { background:var(--soft); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:18px 0; }
+  a { color:var(--blue); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Security Policy</h1>
+<p class="meta">SteadyGantt for Jira · Effective August 13, 2026</p>
+
+<div class="callout">
+  <p><b>Architecture in one sentence:</b> SteadyGantt runs entirely on Atlassian's Forge platform with
+  no servers, databases, or infrastructure of its own — the platform technically prevents it from
+  sending data anywhere outside Atlassian.</p>
+</div>
+
+<h2>Platform security</h2>
+<ul>
+  <li><b>No egress by design.</b> The app declares no external endpoints. Atlassian's Forge runtime
+  enforces this at the network level; the production version qualifies for the
+  <a href="https://go.atlassian.com/runs-on-atlassian">Runs on Atlassian</a> program.</li>
+  <li><b>No secrets handled.</b> The app never asks for passwords, API tokens, or Personal Access
+  Tokens. All Jira access happens through Atlassian's managed OAuth, as the logged-in user, within
+  the scopes approved by your admin at install time.</li>
+  <li><b>Minimal scopes.</b> <code>read:jira-work</code> (draw the chart),
+  <code>write:jira-work</code> (apply only the date changes you explicitly confirm),
+  <code>storage:app</code> (save your view preferences in Atlassian-hosted Forge storage).</li>
+  <li><b>No third-party code at runtime.</b> The UI is a single self-contained bundle — no CDN
+  scripts, no analytics SDKs, no trackers.</li>
+</ul>
+
+<h2>Data handling</h2>
+<ul>
+  <li>Issue data is read through official Atlassian APIs and rendered in your browser. It is never
+  transmitted to the developer or any third party.</li>
+  <li>Writes happen only after you review and confirm an explicit change summary, touch only the
+  date fields you checked, and every sync can be undone in one click.</li>
+  <li>Stored data is limited to per-user view preferences (in Atlassian-hosted Forge storage) and a
+  task-list cache in your own browser. Details in the
+  <a href="privacy.html">privacy policy</a>.</li>
+</ul>
+
+<h2>Development practices</h2>
+<ul>
+  <li>Every release passes an automated regression suite (including write-back safety assertions:
+  payloads contain only confirmed fields; undo payloads restore exact previous values) and a
+  rendering performance budget enforced in CI.</li>
+  <li>Dependencies are minimal by policy (no UI framework, no runtime dependencies beyond the
+  official Atlassian Forge SDK) to keep the supply-chain surface small.</li>
+</ul>
+
+<h2>Reporting a vulnerability</h2>
+<p>If you believe you've found a security issue, email
+<a href="mailto:carsh.blue522@gmail.com">carsh.blue522@gmail.com</a> with steps to reproduce.
+You'll get a first response within <b>24 hours</b>. Please allow a reasonable window for a fix
+before public disclosure; good-faith research is welcome and will never be met with legal threats.</p>
+
+<p style="margin-top:36px"><a href="index.html">← Back to SteadyGantt</a></p>
+
+</div>
+</body>
+</html>
