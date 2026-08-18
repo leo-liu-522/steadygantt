@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Jira Gantt App Data-Safety Checklist</title>
+<meta name="description" content="10 tests to run in the first hour of any Jira Gantt app trial — before it touches a live project. Every test recreates a data-loss incident reported in a public Marketplace review. Tool-agnostic, printable.">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="canonical" href="https://leo-liu-522.github.io/steadygantt/guides/jira-gantt-data-safety-checklist.html">
+<style>
+  :root { --blue:#0052CC; --ink:#172B4D; --sub:#44546F; --bg:#FFFFFF; --soft:#F7F8F9; --line:#DCDFE4; --green:#22A06B; --red:#AE2A19; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color:var(--ink); background:var(--bg); }
+  .wrap { max-width:880px; margin:0 auto; padding:0 24px; }
+  nav { padding:18px 0; font-size:.9rem; display:flex; gap:16px; align-items:center; }
+  nav a { color:var(--blue); text-decoration:none; }
+  nav .spacer { margin-left:auto; }
+  nav button { padding:6px 14px; border:1px solid var(--line); background:var(--soft); border-radius:6px;
+               cursor:pointer; font-size:.82rem; color:var(--sub); }
+  header { padding:24px 0 32px; }
+  h1 { font-size:1.9rem; letter-spacing:-.02em; margin-bottom:12px; }
+  .tagline { font-size:1.05rem; color:var(--sub); max-width:740px; }
+  .setup { background:#FFF7E6; border:1px solid #F5CD47; border-radius:12px; padding:16px 18px;
+           margin:26px 0 6px; font-size:.95rem; }
+  .setup b { color:#7F5F01; }
+  #progress { position:sticky; top:0; background:var(--bg); padding:10px 0; border-bottom:1px solid var(--line);
+              font-size:.9rem; color:var(--sub); z-index:5; }
+  #progress b { color:var(--ink); }
+  .test { border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:14px 0; }
+  .test.done { background:#F0FBF5; border-color:#BBE7D0; }
+  .test label.head { display:flex; gap:12px; align-items:baseline; cursor:pointer; font-weight:600; font-size:1.02rem; }
+  .test input[type=checkbox] { width:17px; height:17px; flex:none; transform:translateY(2px); cursor:pointer; }
+  .test .num { color:var(--sub); font-weight:600; }
+  .test .why { margin:8px 0 0 29px; font-size:.88rem; color:var(--sub); }
+  .test .why a { color:var(--blue); text-decoration:none; }
+  .test .steps { margin:8px 0 0 29px; font-size:.93rem; }
+  .test .steps b { font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--sub); }
+  .test .pass { margin:8px 0 0 29px; font-size:.93rem; color:var(--green); }
+  .test .pass b { color:var(--green); }
+  section.tail { padding:32px 0; border-top:1px solid var(--line); margin-top:32px; }
+  h2 { font-size:1.3rem; margin-bottom:14px; }
+  p { margin-bottom:12px; }
+  .cta { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:22px; text-align:center; }
+  .cta a.btn { display:inline-block; margin-top:10px; background:var(--blue); color:#fff; text-decoration:none;
+               font-weight:600; padding:10px 22px; border-radius:8px; }
+  .note { font-size:.82rem; color:var(--sub); }
+  footer { border-top:1px solid var(--line); padding:28px 0 44px; font-size:.82rem; color:var(--sub); margin-top:32px; }
+  footer a { color:var(--blue); text-decoration:none; }
+  @media print {
+    nav, #progress, .cta, footer { display:none; }
+    .test { break-inside:avoid; border-color:#999; }
+    body { font-size:12px; }
+    a { color:inherit; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <a href="../index.html">← SteadyGantt</a>
+  <span class="spacer"></span>
+  <button onclick="window.print()">Print this checklist</button>
+</nav>
+
+<header>
+  <h1>The Jira Gantt app data-safety checklist</h1>
+  <p class="tagline">Gantt apps get write access to your Jira. Most trials test the features; almost nobody
+  tests what the app does to the data. I read 500+ Marketplace reviews across this category — issues deleted
+  with no recycle bin, dates mass-reset on install, weeks of planning lost to a missing save button.
+  <b>Every test below recreates one of those incidents.</b> Run them in the first hour of any trial —
+  this page works for every Gantt app, including mine.</p>
+  <div class="setup"><b>Before you start:</b> create a throwaway test project — 20 or so issues, a few
+  subtasks, some with dates, some without, a couple of "Blocks" links. Never point a Gantt trial at a live
+  project first. Note the "Updated" timestamps of a few issues; you'll need them in test 1.</div>
+</header>
+
+<div id="progress"><b><span id="pcount">0</span>/10</b> tests passed · progress is saved in your browser</div>
+
+<div class="test" data-t="1">
+  <label class="head"><input type="checkbox"><span class="num">1.</span>Install, open, change nothing — then check the "Updated" field</label>
+  <p class="why">Why: reviewers report an app updating the last-modified date on <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">thousands of issues before first use</a>, wrecking reports and audit trails (Dec 2024, May 2024).</p>
+  <p class="steps"><b>Do:</b> install the app, open its Gantt view once, click nothing else. Go back to Jira and check the "Updated" timestamps you noted.</p>
+  <p class="pass"><b>Pass:</b> every timestamp is exactly as you left it.</p>
+</div>
+
+<div class="test" data-t="2">
+  <label class="head"><input type="checkbox"><span class="num">2.</span>Remove an issue from the chart — then search Jira for it</label>
+  <p class="why">Why: "removing" a project from one app's view <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">actually deleted the Jira issues, with no trash bin</a> (Jun 2026).</p>
+  <p class="steps"><b>Do:</b> use whatever "remove", "exclude", or "delete from view" option the app offers on a test issue. Then search for that issue key in Jira.</p>
+  <p class="pass"><b>Pass:</b> the issue still exists. Bonus: the app's wording made clear it was only leaving the view.</p>
+</div>
+
+<div class="test" data-t="3">
+  <label class="head"><input type="checkbox"><span class="num">3.</span>Drag a bar — then check Jira immediately</label>
+  <p class="why">Why: some apps write to Jira on every drag with no confirmation; reviewers report <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">dates overwritten they never meant to change</a> (Mar 2024, Feb 2022).</p>
+  <p class="steps"><b>Do:</b> drag one bar a few days. Without saving or confirming anything, open that issue in Jira.</p>
+  <p class="pass"><b>Pass:</b> Jira is unchanged until you explicitly confirm — and you can see exactly which fields will be written before they are.</p>
+</div>
+
+<div class="test" data-t="4">
+  <label class="head"><input type="checkbox"><span class="num">4.</span>Close the tab mid-edit — did your work survive?</label>
+  <p class="why">Why: "reload the page" was one vendor's official advice for errors — <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">losing all unsaved work every time</a> (Sep 2025, Sep 2020).</p>
+  <p class="steps"><b>Do:</b> make several unsaved changes, close the tab without saving, reopen the app.</p>
+  <p class="pass"><b>Pass:</b> your in-progress changes are still there. There is no save button to forget.</p>
+</div>
+
+<div class="test" data-t="5">
+  <label class="head"><input type="checkbox"><span class="num">5.</span>Sync a change — then undo it</label>
+  <p class="why">Why: after an unwanted mass change, one reviewer <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">"had to reset the timelines for each of the activity manually"</a> (Feb 2022).</p>
+  <p class="steps"><b>Do:</b> apply one date change to Jira through the app. Now put it back using only the app.</p>
+  <p class="pass"><b>Pass:</b> one-click undo restores the exact previous values — including "no date" if the field was empty before.</p>
+</div>
+
+<div class="test" data-t="6">
+  <label class="head"><input type="checkbox"><span class="num">6.</span>Edit dates in Jira directly — does the app respect them?</label>
+  <p class="why">Why: sync is two-way trouble; reviewers report apps <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">resetting all start/due dates "without any explicit consent"</a> (Feb 2022, May 2020).</p>
+  <p class="steps"><b>Do:</b> change a due date in Jira itself, then reopen the Gantt app and wait for it to refresh.</p>
+  <p class="pass"><b>Pass:</b> the app shows the new Jira value. It never "corrects" Jira to match its own stored copy.</p>
+</div>
+
+<div class="test" data-t="7">
+  <label class="head"><input type="checkbox"><span class="num">7.</span>Set up a view, come back tomorrow</label>
+  <p class="why">Why: reviewers report structure and view settings <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">gone after reopening the page</a> — hierarchy flattened, charts vanished after saving (Sep 2020, Jul 2019).</p>
+  <p class="steps"><b>Do:</b> configure zoom, collapsed groups, and column layout. Close everything; reopen the next day (or in a private window on another machine).</p>
+  <p class="pass"><b>Pass:</b> the view is exactly as you left it.</p>
+</div>
+
+<div class="test" data-t="8">
+  <label class="head"><input type="checkbox"><span class="num">8.</span>Open the network inspector — where does your data go?</label>
+  <p class="why">Why: one app demanded third-party cookies for <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">LinkedIn, Facebook, and Google Tag Manager domains</a> just to run (2020–2022); others store your project data on the vendor's own servers.</p>
+  <p class="steps"><b>Do:</b> open DevTools → Network while using the app. Note every non-Atlassian domain. Cross-check the vendor's privacy page: where is data processed and stored?</p>
+  <p class="pass"><b>Pass:</b> no trackers, no surprise domains, and a clear answer on data residency. On the Atlassian Marketplace, "Runs on Atlassian" means data never leaves Atlassian's infrastructure.</p>
+</div>
+
+<div class="test" data-t="9">
+  <label class="head"><input type="checkbox"><span class="num">9.</span>Load your biggest project — time it</label>
+  <p class="why">Why: reviewers abandoned apps over <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">2–3 seconds of lag per change</a> and initial loads measured <a href="https://marketplace.atlassian.com/apps/1211717/gantt-cloud?tab=reviews">in hours</a> (2020, 2016).</p>
+  <p class="steps"><b>Do:</b> after the safety tests pass on the throwaway project, point the app at your largest real project (read-only!). Time first load, then drag a bar and count the delay.</p>
+  <p class="pass"><b>Pass:</b> first view in seconds, drag response effectively instant at your real project size.</p>
+</div>
+
+<div class="test" data-t="10">
+  <label class="head"><input type="checkbox"><span class="num">10.</span>Read the newest ten reviews, then email support</label>
+  <p class="why">Why: averages hide decay — an app can hold a decent lifetime rating while recent reviews say <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">"it only worked for 3 months out of the 6"</a> (May 2025). And when something breaks, support speed is the product.</p>
+  <p class="steps"><b>Do:</b> sort reviews newest-first and read ten. Then send support one real question and start a timer.</p>
+  <p class="pass"><b>Pass:</b> recent reviews match the average, and a human answers your question in one business day.</p>
+</div>
+
+<section class="tail">
+  <h2>Why I wrote this</h2>
+  <p>I built <a href="../index.html" style="color:var(--blue)">SteadyGantt</a> after reading those 500+ reviews —
+  it's designed to pass every test above (read-only until you confirm a diff, everything autosaves, one-click
+  undo, no external servers). But the checklist is deliberately tool-agnostic: whichever app you pick, run
+  these tests first. The hour costs nothing; the incidents above cost real teams real data.</p>
+  <div class="cta">
+    <b>You can run tests 1–8 against SteadyGantt right now.</b>
+    <p class="note" style="margin-top:6px">The live demo is the full app with sample data — no install, no signup.</p>
+    <a class="btn" href="../demo/">Try the live demo →</a>
+  </div>
+</section>
+
+<footer>
+  <p>SteadyGantt is an independent product, not affiliated with any vendor mentioned. All incidents referenced
+  are from public Atlassian Marketplace reviews, linked at each test; they describe the version in use at the
+  review date. See also: <a href="../compare/jira-gantt-chart-apps.html">all Jira Gantt apps compared with live
+  data</a> · <a href="../compare/biggantt-alternative.html">BigGantt notes</a> ·
+  <a href="../compare/wbs-gantt-chart-alternative.html">WBS Gantt-Chart notes</a>.</p>
+  <p style="margin-top:8px"><a href="../index.html">SteadyGantt home</a> · <a href="../privacy.html">Privacy</a> · <a href="mailto:steadygantt@outlook.com">steadygantt@outlook.com</a></p>
+</footer>
+
+</div>
+<script>
+// 勾选进度存 localStorage；全程无网络请求
+(function () {
+  var K = "steadygantt:checklist";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(K) || "{}"); } catch (e) {}
+  var tests = document.querySelectorAll(".test");
+  var count = document.getElementById("pcount");
+  function refresh() {
+    var n = 0;
+    tests.forEach(function (t) {
+      var on = t.querySelector("input").checked;
+      t.classList.toggle("done", on);
+      if (on) n++;
+    });
+    count.textContent = n;
+  }
+  tests.forEach(function (t) {
+    var id = t.getAttribute("data-t"), box = t.querySelector("input");
+    box.checked = !!saved[id];
+    box.addEventListener("change", function () {
+      saved[id] = box.checked;
+      try { localStorage.setItem(K, JSON.stringify(saved)); } catch (e) {}
+      refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>
