@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SteadyGantt Live Demo — Try It Without Installing</title>
+<meta name="description" content="A live, fully interactive demo of SteadyGantt with sample data. Drag bars, review the exact diff, sync, undo — nothing here touches a real Jira. Reload to reset.">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="canonical" href="https://leo-liu-522.github.io/steadygantt/demo/">
+<style>
+  * { box-sizing: border-box; }
+  body { font: 13px/1.4 -apple-system, sans-serif; margin: 0; background: #fff; color: #1E293B; }
+  #demobar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+             padding: 9px 14px; background: #F0FBF5; border-bottom: 1px solid #BBE7D0;
+             font-size: 12.5px; color: #216E4E; }
+  #demobar b { color: #164B35; }
+  #demobar a { color: #0052CC; text-decoration: none; }
+  #demobar a:hover { text-decoration: underline; }
+  #demobar .spacer { margin-left: auto; }
+  #toolbar { display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+             border-bottom: 2px solid #EBECF0; background: #FAFBFC; flex-wrap: wrap; }
+  #toolbar .brand { font-weight: 600; color: #172B4D; margin-right: 6px; font-size: 14px; }
+  #zooms button, #toolbar > button {
+    padding: 5px 12px; border: 1px solid #C1C7D0; background: #fff; border-radius: 6px;
+    cursor: pointer; font-size: 12px; color: #42526E; transition: background .1s; }
+  #zooms button:hover, #toolbar > button:hover:not(:disabled) { background: #F1F2F4; }
+  #zooms button.active { background: #0052CC; color: #fff; border-color: #0052CC; }
+  #btnSync { background: #0052CC !important; color: #fff !important; border-color: #0052CC !important; }
+  #zooms { display: flex; gap: 0; }
+  #zooms button:not(:first-child) { border-left: 0; border-radius: 0; }
+  #zooms button:first-child { border-radius: 6px 0 0 6px; }
+  #zooms button:last-child { border-radius: 0 6px 6px 0; }
+  #status { margin-left: auto; color: #626F86; font-size: 12.5px; }
+  #stage { display: block; width: 100%; height: 620px; cursor: grab; }
+  #stage:active { cursor: grabbing; }
+  #toolbar button.primary { background: #3B82F6; color: #fff; border-color: #3B82F6; }
+  #panel { position: fixed; inset: 0; background: rgba(15,23,42,.4); z-index: 10;
+           display: flex; align-items: center; justify-content: center; }
+  #panelBox { background: #fff; border-radius: 10px; padding: 18px 22px; max-width: 720px;
+              max-height: 80vh; overflow: auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  #panelBox h3 { margin: 0 0 10px; }
+  #panelBox table { border-collapse: collapse; width: 100%; }
+  #panelBox td, #panelBox th { border-bottom: 1px solid #E5E9EF; padding: 6px 8px;
+                               text-align: left; font-size: 12px; }
+  #panelBox .dim { color: #64748B; font-size: 11px; }
+  #panelBox .warn { color: #B45309; background: #FEF3C7; padding: 6px 10px; border-radius: 6px; }
+  .pbtns { margin-top: 14px; display: flex; gap: 10px; }
+  .pbtns .primary { background: #3B82F6; color: #fff; border-color: #3B82F6; }
+  #pResult { margin-top: 10px; font-size: 12px; }
+  #demofoot { padding: 14px; font-size: 12px; color: #626F86; border-top: 1px solid #EBECF0; }
+  #demofoot a { color: #0052CC; text-decoration: none; }
+</style>
+</head>
+<body>
+  <div id="demobar">
+    <span><b>Live demo, sample data.</b> Nothing here touches a real Jira — the "Jira" behind this page
+    is an in-memory copy. Drag a bar, hit <b>Sync to Jira</b>, review the diff, then undo it.
+    Reload the page to reset.</span>
+    <span class="spacer"></span>
+    <a href="../index.html">← What is SteadyGantt?</a>
+  </div>
+  <div id="toolbar">
+    <span class="brand">SteadyGantt</span>
+    <span id="zooms">
+      <button>Hour</button><button>Day</button><button>Week</button><button>Month</button>
+    </span>
+    <button id="btnToday">Today</button>
+    <button id="btnDensity">Compact rows</button>
+    <button id="btnExpand">Expand all</button>
+    <button id="btnCollapse">Collapse all</button>
+    <button id="btnExport">Export PNG</button>
+    <button id="btnSync" class="primary" style="display:none">Sync to Jira</button>
+    <button id="btnDiscard" style="display:none">Discard drafts</button>
+    <button id="btnUndo" style="display:none">Undo last sync</button>
+    <span id="status">Loading…</span>
+  </div>
+  <canvas id="stage"></canvas>
+  <div id="panel" style="display:none">
+    <div id="panelBox"></div>
+  </div>
+  <div id="demofoot">
+    Things to try: drag a bar and watch the ghost of the original stay put · click <b>Sync to Jira</b> and
+    see the exact field-by-field diff before anything is written · sync, then <b>Undo last sync</b> ·
+    zoom from hours to months · collapse an epic · reload and notice the view restored itself.
+    &nbsp;·&nbsp; <a href="../index.html">SteadyGantt home</a> ·
+    <a href="../compare/jira-gantt-chart-apps.html">Compare Jira Gantt apps</a> ·
+    <a href="mailto:steadygantt@outlook.com">steadygantt@outlook.com</a>
+  </div>
+  <script>
+  // 首次访问把视口定位到今天附近（数据集最早任务在 49 天前，见 demo-bridge.ts；
+  // 默认 scrollX=0 会停在项目起点，today 标记在屏幕外，第一印象全是已完成任务）。
+  try {
+    const K = "steadygantt:view:DEMO";
+    if (!localStorage.getItem(K)) {
+      const DAY = 86400e3, tMin = Date.now() - 51 * DAY;      // earliest(-49d) - 2d padding
+      const todayPx = (Date.now() - tMin) / 36e5 * (40 / 24); // Day 档 40px/天
+      const chartW = Math.max(400, window.innerWidth - 260);
+      localStorage.setItem(K, JSON.stringify({
+        zoom: 1, scrollX: Math.max(0, todayPx - chartW / 3), scrollY: 0,
+        collapsed: [], savedAt: Date.now(),
+      }));
+    }
+  } catch (e) {}
+  </script>
+  <script src="bundle.js"></script>
+</body>
+</html>
