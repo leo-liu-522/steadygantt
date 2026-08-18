@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BigGantt Alternative for Jira — SteadyGantt</title>
+<meta name="description" content="Left BigGantt over rewritten dates, deleted issues, or cookie walls? SteadyGantt is read-only until you confirm a diff — and every sync has one-click undo. A factual, sourced comparison.">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="canonical" href="https://leo-liu-522.github.io/steadygantt/compare/biggantt-alternative.html">
+<style>
+  :root { --blue:#0052CC; --ink:#172B4D; --sub:#44546F; --bg:#FFFFFF; --soft:#F7F8F9; --line:#DCDFE4; --green:#22A06B; --red:#AE2A19; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color:var(--ink); background:var(--bg); }
+  .wrap { max-width:880px; margin:0 auto; padding:0 24px; }
+  nav { padding:18px 0; font-size:.9rem; }
+  nav a { color:var(--blue); text-decoration:none; }
+  header { padding:28px 0 36px; }
+  h1 { font-size:1.9rem; letter-spacing:-.02em; margin-bottom:12px; }
+  .tagline { font-size:1.08rem; color:var(--sub); max-width:720px; }
+  section { padding:32px 0; border-top:1px solid var(--line); }
+  h2 { font-size:1.3rem; margin-bottom:16px; }
+  p { margin-bottom:12px; }
+  .quote { background:var(--soft); border-left:3px solid var(--red); border-radius:0 10px 10px 0;
+           padding:14px 16px; margin:0 0 12px; font-size:.93rem; color:var(--sub); }
+  .quote b { color:var(--ink); }
+  .quote .src { display:block; margin-top:6px; font-size:.8rem; }
+  .quote .src a { color:var(--blue); text-decoration:none; }
+  .tablebox { overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; min-width:640px; }
+  th, td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--soft); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); }
+  tr:last-child td { border-bottom:none; }
+  td.yes { color:var(--green); font-weight:600; }
+  td.no { color:var(--red); }
+  .note { font-size:.82rem; color:var(--sub); margin-top:10px; }
+  .cta { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:24px; text-align:center; }
+  .cta a.btn { display:inline-block; margin-top:12px; background:var(--blue); color:#fff; text-decoration:none;
+               font-weight:600; padding:10px 22px; border-radius:8px; }
+  details { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:10px; }
+  summary { cursor:pointer; font-weight:600; font-size:.95rem; }
+  details p { margin:10px 0 0; font-size:.92rem; color:var(--sub); }
+  footer { border-top:1px solid var(--line); padding:28px 0 44px; font-size:.82rem; color:var(--sub); }
+  footer a { color:var(--blue); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav><a href="../index.html">← SteadyGantt</a></nav>
+
+<header>
+  <h1>Looking for a BigGantt alternative?</h1>
+  <p class="tagline">Usually people land here for one of three reasons: BigGantt rewrote dates they never touched,
+  deleted issues when a project was removed from a view, or demanded third-party cookies. I built
+  <b>SteadyGantt</b> after reading 273 BigGantt reviews. Its one rule: <b>nothing is written to Jira until you
+  confirm a diff.</b></p>
+</header>
+
+<section>
+  <h2>What BigGantt reviewers say</h2>
+  <p>Verbatim quotes from public Marketplace reviews, retrieved August 2026.
+  <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">Read them all here.</a></p>
+
+  <div class="quote">"When you remove a project from the Gantt view, it <b>actually deletes the corresponding
+  Jira issues</b>… there's <b>no trash bin or recovery option</b>."
+  <span class="src">1★, June 2026 — <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">source</a></span></div>
+
+  <div class="quote">"It changed the 'Updated Date' on <b>several thousand tickets</b>. My reporting is now
+  messed up." <span class="src">1★, May 2024 — <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">source</a></span></div>
+
+  <div class="quote">"All my issues start date &amp; end dates were <b>reset without any explicit consent</b>."
+  <span class="src">1★, February 2022 — <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">source</a></span></div>
+
+  <div class="quote">"I blocked their third party cookies for <b>linkedin, facebook, googletagmanager</b>…
+  the howto wants me to allow all third party cookies wherever. NO WAY."
+  <span class="src">1★, February 2022 — <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">source</a></span></div>
+
+  <div class="quote">"I just wanted to make gantt charts from my project, not replace a bunch of functionality
+  I was already using in other apps." <span class="src">2★, February 2021, on the BigPicture setup — <a href="https://marketplace.atlassian.com/apps/1213016/biggantt-gantt-chart-for-jira?tab=reviews">source</a></span></div>
+</section>
+
+<section>
+  <h2>Don't take my word for it — test both in ten minutes</h2>
+  <p>Every row below comes from a real incident in the reviews. Run these tests during any trial, mine included.</p>
+  <div class="tablebox">
+  <table>
+    <tr><th>The test</th><th>SteadyGantt</th><th>What BigGantt reviewers reported*</th></tr>
+    <tr>
+      <td>Install, open once, change nothing. Check the "Updated" field on your issues.</td>
+      <td class="yes">Untouched. The app is read-only until you confirm a change.</td>
+      <td class="no">"Updates the last updated date on all projects even before first use. No warning!" (Dec 2024)</td>
+    </tr>
+    <tr>
+      <td>Remove a project from the chart, then search Jira for its issues.</td>
+      <td class="yes">Still there. SteadyGantt has no delete path — it can't delete an issue even by accident.</td>
+      <td class="no">"Actually deletes the corresponding Jira issues… no trash bin." (Jun 2026)</td>
+    </tr>
+    <tr>
+      <td>Drag some bars, close the tab without saving.</td>
+      <td class="yes">Drafts restore when you come back. Jira was never touched.</td>
+      <td class="no">Unintended date overwrites via sync. (Mar 2024)</td>
+    </tr>
+    <tr>
+      <td>Apply a change, then change your mind.</td>
+      <td class="yes">One click restores the previous values.</td>
+      <td class="no">"Had to reset the timelines for each of the activity manually." (Feb 2022)</td>
+    </tr>
+    <tr>
+      <td>Open the network inspector while the app runs.</td>
+      <td class="yes">Zero third-party requests, cookies, or analytics. Data never leaves Atlassian (Forge).</td>
+      <td class="no">Reviewers report cookie walls for LinkedIn, Facebook, Google Tag Manager domains. (2020–2022)</td>
+    </tr>
+    <tr>
+      <td>Time install → usable chart.</td>
+      <td class="yes">Open the project page. The chart is already there.</td>
+      <td class="no">"Default import settings do not result in a useful chart." (Nov 2021)</td>
+    </tr>
+  </table>
+  </div>
+  <p class="note">*Reports describe the version in use at the review date; BigGantt may have changed since.
+  That's why each row is a test, not a claim — run it yourself.</p>
+</section>
+
+<section>
+  <h2>Side by side</h2>
+  <div class="tablebox">
+  <table>
+    <tr><th></th><th>SteadyGantt</th><th>BigGantt (Appfire)</th></tr>
+    <tr><td>Marketplace rating</td><td>New — launching 2026</td><td>3.5 / 5 · 273 reviews (Aug 2026)</td></tr>
+    <tr><td>Write model</td><td>Draft → diff → confirm per field → undo</td><td>Direct sync to Jira</td></tr>
+    <tr><td>Autosave of drafts &amp; view state</td><td class="yes">Yes</td><td>—</td></tr>
+    <tr><td>Hour-level zoom</td><td class="yes">Hours to months</td><td class="no">Day-level minimum, per reviewers (Feb 2024)</td></tr>
+    <tr><td>Data leaves Atlassian?</td><td class="yes">Never</td><td>Vendor-hosted components</td></tr>
+    <tr><td>Suite dependency</td><td>None</td><td>Part of the BigPicture family</td></tr>
+    <tr><td>Portfolio / resource management</td><td class="no">Not included, by design</td><td class="yes">Yes, via BigPicture modules</td></tr>
+    <tr><td>Price, 100 users</td><td>Free at launch; $1.25/user/mo planned</td><td>$2,090/yr (Aug 2026, pricing API)</td></tr>
+    <tr><td>Free tier</td><td class="yes">Free ≤ 10 users, forever</td><td class="yes">Free ≤ 10 users</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>When you should stay with BigGantt</h2>
+  <p>SteadyGantt doesn't do portfolio management, resource workload, or capacity planning — on purpose.
+  If you need those, BigGantt with BigPicture, or Tempo's Structure Gantt (4.2/5 as of Aug 2026), is the right
+  shape of tool. SteadyGantt does one thing: a fast Gantt view of your project that can't corrupt your data.</p>
+</section>
+
+<section>
+  <h2>Common questions</h2>
+  <details><summary>Can SteadyGantt delete or modify my Jira issues?</summary>
+    <p>It can't delete anything — there's no delete call in the app. The only fields it ever writes are the
+    dates you tick in the diff dialog, and every sync has one-click undo.</p></details>
+  <details><summary>Does my data leave Atlassian?</summary>
+    <p>No. SteadyGantt runs on Atlassian Forge — no external servers, no third-party requests, no cookies,
+    no analytics.</p></details>
+  <details><summary>Is there a migration from BigGantt?</summary>
+    <p>Nothing to migrate. Your dates, hierarchy, and links live in Jira, not in either app. Uninstall one,
+    install the other, everything's there.</p></details>
+</section>
+
+<section>
+  <div class="cta">
+    <b>SteadyGantt is launching on the Atlassian Marketplace.</b>
+    <p class="note" style="margin-top:6px">Free for teams of 10 or fewer, forever. I answer every mail within 24 hours.</p>
+    <a class="btn" href="mailto:steadygantt@outlook.com?subject=Notify%20me%20when%20SteadyGantt%20launches">Get notified at launch</a>
+  </div>
+</section>
+
+<footer>
+  <p>SteadyGantt is an independent product, not affiliated with Appfire, Ricksoft, Tempo, or Atlassian.
+  "BigGantt" and "BigPicture" are trademarks of their respective owners, referenced for identification only.
+  All quotes are verbatim from public Atlassian Marketplace reviews and linked to their source. Ratings, prices,
+  and installs were retrieved in August 2026 and may have changed.</p>
+  <p style="margin-top:8px"><a href="../index.html">SteadyGantt home</a> · <a href="jira-gantt-chart-apps.html">All Jira Gantt apps compared</a> · <a href="../privacy.html">Privacy</a> · <a href="mailto:steadygantt@outlook.com">steadygantt@outlook.com</a></p>
+</footer>
+
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Can SteadyGantt delete or modify my Jira issues?",
+     "acceptedAnswer": {"@type": "Answer", "text": "It can't delete anything — there is no delete call in the app. The only fields it ever writes are the dates you tick in the diff dialog, and every sync has one-click undo."}},
+    {"@type": "Question", "name": "Does my data leave Atlassian?",
+     "acceptedAnswer": {"@type": "Answer", "text": "No. SteadyGantt runs on Atlassian Forge — no external servers, no third-party requests, no cookies, no analytics."}},
+    {"@type": "Question", "name": "Is there a migration from BigGantt?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Nothing to migrate. Dates, hierarchy, and links live in Jira, not in either app. Uninstall one, install the other, everything's there."}}
+  ]
+}
+</script>
+</body>
+</html>

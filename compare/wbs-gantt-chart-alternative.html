@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WBS Gantt-Chart Alternative for Jira — SteadyGantt</title>
+<meta name="description" content="Lost work in WBS Gantt-Chart because there's no autosave? SteadyGantt saves every draft and view automatically, and never writes to Jira until you confirm a diff. A factual, sourced comparison.">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="canonical" href="https://leo-liu-522.github.io/steadygantt/compare/wbs-gantt-chart-alternative.html">
+<style>
+  :root { --blue:#0052CC; --ink:#172B4D; --sub:#44546F; --bg:#FFFFFF; --soft:#F7F8F9; --line:#DCDFE4; --green:#22A06B; --red:#AE2A19; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color:var(--ink); background:var(--bg); }
+  .wrap { max-width:880px; margin:0 auto; padding:0 24px; }
+  nav { padding:18px 0; font-size:.9rem; }
+  nav a { color:var(--blue); text-decoration:none; }
+  header { padding:28px 0 36px; }
+  h1 { font-size:1.9rem; letter-spacing:-.02em; margin-bottom:12px; }
+  .tagline { font-size:1.08rem; color:var(--sub); max-width:720px; }
+  section { padding:32px 0; border-top:1px solid var(--line); }
+  h2 { font-size:1.3rem; margin-bottom:16px; }
+  p { margin-bottom:12px; }
+  .quote { background:var(--soft); border-left:3px solid var(--red); border-radius:0 10px 10px 0;
+           padding:14px 16px; margin:0 0 12px; font-size:.93rem; color:var(--sub); }
+  .quote b { color:var(--ink); }
+  .quote .src { display:block; margin-top:6px; font-size:.8rem; }
+  .quote .src a { color:var(--blue); text-decoration:none; }
+  .tablebox { overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; min-width:640px; }
+  th, td { text-align:left; padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--soft); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; color:var(--sub); }
+  tr:last-child td { border-bottom:none; }
+  td.yes { color:var(--green); font-weight:600; }
+  td.no { color:var(--red); }
+  .note { font-size:.82rem; color:var(--sub); margin-top:10px; }
+  .cta { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:24px; text-align:center; }
+  .cta a.btn { display:inline-block; margin-top:12px; background:var(--blue); color:#fff; text-decoration:none;
+               font-weight:600; padding:10px 22px; border-radius:8px; }
+  footer { border-top:1px solid var(--line); padding:28px 0 44px; font-size:.82rem; color:var(--sub); }
+  footer a { color:var(--blue); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav><a href="../index.html">← SteadyGantt</a></nav>
+
+<header>
+  <h1>Looking for a WBS Gantt-Chart alternative?</h1>
+  <p class="tagline">The most common complaint about WBS Gantt-Chart for Jira isn't features — it's losing work.
+  No autosave, views that reset, charts that vanish after saving. I built <b>SteadyGantt</b> so that losing work
+  is impossible: <b>every draft and every view saves itself, and Jira is only written when you confirm a diff.</b></p>
+</header>
+
+<section>
+  <h2>What WBS Gantt-Chart reviewers say</h2>
+  <p>Verbatim quotes from public Marketplace reviews, retrieved August 2026.
+  <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">Read them all here.</a></p>
+
+  <div class="quote">"It's EASY to waste a lot of time if you don't hit the SAVE button ALL THE TIME…
+  the 'advice' is to reload the page which means you <b>lose all your unsaved work</b>… Autosave as a feature…
+  naah… it's like <b>software from the 1980's</b>."
+  <span class="src">2★, September 2025 — <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">source</a></span></div>
+
+  <div class="quote">"Good when it works, but <b>it only worked for 3 months out of the 6</b> that we used it…
+  we had to stop using it as the impact was too great on our business operations."
+  <span class="src">1★, May 2025 — <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">source</a></span></div>
+
+  <div class="quote">"After reopening the page later <b>all my changes were lost</b>. This renders it useless for me."
+  <span class="src">1★, September 2020 — <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">source</a></span></div>
+
+  <div class="quote">"After pressing on the 'Save' button, <b>the Gantt disappeared</b>. When I am trying to look
+  for the same Gantt again, I cannot find and open this Gantt."
+  <span class="src">1★, July 2019 — <a href="https://marketplace.atlassian.com/apps/1211768/wbs-gantt-chart-for-jira-enterprise-project-management?tab=reviews">source</a></span></div>
+</section>
+
+<section>
+  <h2>Test both in ten minutes</h2>
+  <p>Each test below recreates an incident from the reviews. Run them during any trial, mine included.</p>
+  <div class="tablebox">
+  <table>
+    <tr><th>The test</th><th>SteadyGantt</th><th>What WBS reviewers reported*</th></tr>
+    <tr>
+      <td>Drag some bars, close the tab without saving anything.</td>
+      <td class="yes">Come back — your drafts are exactly where you left them. There is no save button to forget.</td>
+      <td class="no">"Reload the page… you lose all your unsaved work." (Sep 2025)</td>
+    </tr>
+    <tr>
+      <td>Set up your view — zoom, collapsed groups, column widths — and reopen the page tomorrow.</td>
+      <td class="yes">Restored exactly, on any device.</td>
+      <td class="no">"The view can not be saved, keep coming back to original." (Sep 2023)</td>
+    </tr>
+    <tr>
+      <td>Reorganize your hierarchy, then leave and come back.</td>
+      <td class="yes">Structure drafts persist until you apply or discard them.</td>
+      <td class="no">"The formatting is all gone, the subtasks are back in the general list." (Sep 2020)</td>
+    </tr>
+    <tr>
+      <td>Plan a short task — a few hours, not days.</td>
+      <td class="yes">Hour-level zoom; bars can be hours long.</td>
+      <td class="no">"Doesn't allow to input task estimations in hours." (Jul 2019)</td>
+    </tr>
+    <tr>
+      <td>Check what happens to Jira while you experiment.</td>
+      <td class="yes">Nothing, until you review a diff and confirm — and even then, one-click undo.</td>
+      <td class="no">"All my issues data, descriptions and notes went missing after using this." (Mar 2021)</td>
+    </tr>
+  </table>
+  </div>
+  <p class="note">*Reports describe the version in use at the review date; WBS Gantt-Chart may have changed since.
+  Run the tests yourself.</p>
+</section>
+
+<section>
+  <h2>Side by side</h2>
+  <div class="tablebox">
+  <table>
+    <tr><th></th><th>SteadyGantt</th><th>WBS Gantt-Chart (Ricksoft)</th></tr>
+    <tr><td>Marketplace rating</td><td>New — launching 2026</td><td>3.5 / 5 · 160 reviews (Aug 2026)</td></tr>
+    <tr><td>Autosave</td><td class="yes">Everything, always</td><td class="no">Manual save, per reviewers (Sep 2025)</td></tr>
+    <tr><td>Write model</td><td>Draft → diff → confirm → undo</td><td>Writes on save</td></tr>
+    <tr><td>Hour-level planning</td><td class="yes">Yes</td><td class="no">Day-level, per reviewers</td></tr>
+    <tr><td>Setup</td><td>None — open and it's there</td><td>Configuration required</td></tr>
+    <tr><td>MS Project-style WBS numbering</td><td class="no">No</td><td class="yes">Yes</td></tr>
+    <tr><td>Price, 100 users</td><td>Free at launch; $1.25/user/mo planned</td><td>$1,320/yr (Aug 2026, pricing API)</td></tr>
+    <tr><td>Free tier</td><td class="yes">Free ≤ 10 users, forever</td><td class="yes">Free ≤ 10 users</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>When you should stay with WBS Gantt-Chart</h2>
+  <p>If your organization plans in classic WBS numbering, imports MS Project files, or relies on its templates
+  and row-level mass date updates, WBS Gantt-Chart is built for that workflow and SteadyGantt isn't.
+  SteadyGantt is for teams that want a fast, zero-setup Gantt view that can't lose their work.</p>
+</section>
+
+<section>
+  <div class="cta">
+    <b>SteadyGantt is launching on the Atlassian Marketplace.</b>
+    <p class="note" style="margin-top:6px">Free for teams of 10 or fewer, forever. I answer every mail within 24 hours.</p>
+    <a class="btn" href="mailto:steadygantt@outlook.com?subject=Notify%20me%20when%20SteadyGantt%20launches">Get notified at launch</a>
+  </div>
+</section>
+
+<footer>
+  <p>SteadyGantt is an independent product, not affiliated with Ricksoft, Appfire, Tempo, or Atlassian.
+  "WBS Gantt-Chart" is a trademark of its owner, referenced for identification only. All quotes are verbatim
+  from public Atlassian Marketplace reviews and linked to their source. Ratings, prices, and installs were
+  retrieved in August 2026 and may have changed.</p>
+  <p style="margin-top:8px"><a href="../index.html">SteadyGantt home</a> · <a href="jira-gantt-chart-apps.html">All Jira Gantt apps compared</a> · <a href="../privacy.html">Privacy</a> · <a href="mailto:steadygantt@outlook.com">steadygantt@outlook.com</a></p>
+</footer>
+
+</div>
+</body>
+</html>
