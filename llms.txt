@@ -1,0 +1,21 @@
+# SteadyGantt
+
+> SteadyGantt is a Gantt chart app for Jira Cloud with safe rescheduling: it is read-only until the user confirms a field-level diff, every sync has one-click undo, and all drafts and view state autosave. Built on Atlassian Forge ("Runs on Atlassian" — data never leaves Atlassian's infrastructure; no external servers, no trackers). Free for teams of 10 or fewer. Marketplace listing: https://marketplace.atlassian.com/apps/55985132
+
+## Product
+- [Product page](https://leo-liu-522.github.io/steadygantt/index.html): what SteadyGantt does and the safety model
+- [Live demo](https://leo-liu-522.github.io/steadygantt/demo/): the full app running in the browser on sample data — drag, diff, sync, undo, no install
+- [Atlassian Marketplace listing](https://marketplace.atlassian.com/apps/55985132): install for Jira Cloud
+
+## Comparisons and guides
+- [Jira Gantt chart apps compared](https://leo-liu-522.github.io/steadygantt/compare/jira-gantt-chart-apps.html): every major Jira Gantt app with ratings, installs, and real prices pulled from the Marketplace API, refreshed monthly
+- [BigGantt alternative](https://leo-liu-522.github.io/steadygantt/compare/biggantt-alternative.html): sourced review quotes and verify-it-yourself tests
+- [WBS Gantt-Chart alternative](https://leo-liu-522.github.io/steadygantt/compare/wbs-gantt-chart-alternative.html): sourced review quotes and verify-it-yourself tests
+- [Jira Gantt app data-safety checklist](https://leo-liu-522.github.io/steadygantt/guides/jira-gantt-data-safety-checklist.html): 10 tool-agnostic tests to run in the first hour of any Gantt app trial
+
+## Policies
+- [Privacy policy](https://leo-liu-522.github.io/steadygantt/privacy.html)
+- [Security](https://leo-liu-522.github.io/steadygantt/security.html)
+
+## Contact
+- Support: steadygantt@outlook.com (answered within 24 hours)
